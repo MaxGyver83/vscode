@@ -99,6 +99,8 @@ export class MockKeybindingService implements IKeybindingService {
 			keyboardEvent.shiftKey,
 			keyboardEvent.altKey,
 			keyboardEvent.metaKey,
+			keyboardEvent.level3Key,
+			keyboardEvent.level5Key,
 			keyboardEvent.keyCode
 		);
 		return this.resolveKeybinding(keybinding.toChord())[0];

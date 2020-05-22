@@ -730,6 +730,8 @@ export class MacLinuxKeyboardMapper implements IKeyboardMapper {
 					shiftKey: scanCodeCombo.shiftKey,
 					altKey: scanCodeCombo.altKey,
 					metaKey: false,
+					level3Key: false,
+					level5Key: false,  // TODO: check
 					keyCode: -1,
 					code: ScanCodeUtils.toString(scanCode)
 				});
@@ -799,7 +801,7 @@ export class MacLinuxKeyboardMapper implements IKeyboardMapper {
 	public simpleKeybindingToScanCodeBinding(keybinding: SimpleKeybinding): ScanCodeBinding[] {
 		// Avoid double Enter bindings (both ScanCode.NumpadEnter and ScanCode.Enter point to KeyCode.Enter)
 		if (keybinding.keyCode === KeyCode.Enter) {
-			return [new ScanCodeBinding(keybinding.ctrlKey, keybinding.shiftKey, keybinding.altKey, keybinding.metaKey, ScanCode.Enter)];
+			return [new ScanCodeBinding(keybinding.ctrlKey, keybinding.shiftKey, keybinding.altKey, keybinding.metaKey, keybinding.level3Key, keybinding.level5Key, ScanCode.Enter)];
 		}
 
 		const scanCodeCombos = this._scanCodeKeyCodeMapper.lookupKeyCodeCombo(
@@ -809,7 +811,7 @@ export class MacLinuxKeyboardMapper implements IKeyboardMapper {
 		let result: ScanCodeBinding[] = [];
 		for (let i = 0, len = scanCodeCombos.length; i < len; i++) {
 			const scanCodeCombo = scanCodeCombos[i];
-			result[i] = new ScanCodeBinding(scanCodeCombo.ctrlKey, scanCodeCombo.shiftKey, scanCodeCombo.altKey, keybinding.metaKey, scanCodeCombo.scanCode);
+			result[i] = new ScanCodeBinding(scanCodeCombo.ctrlKey, scanCodeCombo.shiftKey, scanCodeCombo.altKey, keybinding.metaKey, keybinding.level3Key, keybinding.level3Key, scanCodeCombo.scanCode);
 		}
 		return result;
 	}
@@ -887,7 +889,7 @@ export class MacLinuxKeyboardMapper implements IKeyboardMapper {
 		let constantKeyCode: KeyCode = this._scanCodeKeyCodeMapper.guessStableKeyCode(binding.scanCode);
 		if (constantKeyCode !== -1) {
 			// Verify that this is a good key code that can be mapped back to the same scan code
-			let reverseBindings = this.simpleKeybindingToScanCodeBinding(new SimpleKeybinding(binding.ctrlKey, binding.shiftKey, binding.altKey, binding.metaKey, constantKeyCode));
+			let reverseBindings = this.simpleKeybindingToScanCodeBinding(new SimpleKeybinding(binding.ctrlKey, binding.shiftKey, binding.altKey, binding.metaKey, binding.level3Key, binding.level5Key, constantKeyCode));
 			for (let i = 0, len = reverseBindings.length; i < len; i++) {
 				const reverseBinding = reverseBindings[i];
 				if (reverseBinding.scanCode === binding.scanCode) {
@@ -1047,7 +1049,7 @@ export class MacLinuxKeyboardMapper implements IKeyboardMapper {
 			}
 		}
 
-		const keypress = new ScanCodeBinding(keyboardEvent.ctrlKey, keyboardEvent.shiftKey, keyboardEvent.altKey, keyboardEvent.metaKey, code);
+		const keypress = new ScanCodeBinding(keyboardEvent.ctrlKey, keyboardEvent.shiftKey, keyboardEvent.altKey, keyboardEvent.metaKey, keyboardEvent.level3Key, keyboardEvent.level5Key, code);
 		return new NativeResolvedKeybinding(this, this._OS, [keypress]);
 	}
 

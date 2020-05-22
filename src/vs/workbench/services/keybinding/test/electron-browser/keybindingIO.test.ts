@@ -119,7 +119,7 @@ suite('keybindingIO', () => {
 	test('deserialize scan codes', () => {
 		assert.deepEqual(
 			KeybindingParser.parseUserBinding('ctrl+shift+[comma] ctrl+/'),
-			[new ScanCodeBinding(true, true, false, false, ScanCode.Comma), new SimpleKeybinding(true, false, false, false, KeyCode.US_SLASH)]
+			[new ScanCodeBinding(true, true, false, false, false, false, ScanCode.Comma), new SimpleKeybinding(true, false, false, false, false, false, KeyCode.US_SLASH)]
 		);
 	});
 

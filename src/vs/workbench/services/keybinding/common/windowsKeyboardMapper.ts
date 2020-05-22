@@ -408,7 +408,7 @@ export class WindowsKeyboardMapper implements IKeyboardMapper {
 				const ctrlKey = (mod & 0b001) ? true : false;
 				const shiftKey = (mod & 0b010) ? true : false;
 				const altKey = (mod & 0b100) ? true : false;
-				const scanCodeBinding = new ScanCodeBinding(ctrlKey, shiftKey, altKey, false, scanCode);
+				const scanCodeBinding = new ScanCodeBinding(ctrlKey, shiftKey, altKey, false, false, false, scanCode);  // TODO: check
 				const kb = this._resolveSimpleUserBinding(scanCodeBinding);
 				const strKeyCode = (kb ? KeyCodeUtils.toString(kb.keyCode) : null);
 				const resolvedKb = (kb ? new WindowsNativeResolvedKeybinding(this, [kb]) : null);
@@ -471,7 +471,7 @@ export class WindowsKeyboardMapper implements IKeyboardMapper {
 	}
 
 	public resolveKeyboardEvent(keyboardEvent: IKeyboardEvent): WindowsNativeResolvedKeybinding {
-		const keybinding = new SimpleKeybinding(keyboardEvent.ctrlKey, keyboardEvent.shiftKey, keyboardEvent.altKey, keyboardEvent.metaKey, keyboardEvent.keyCode);
+		const keybinding = new SimpleKeybinding(keyboardEvent.ctrlKey, keyboardEvent.shiftKey, keyboardEvent.altKey, keyboardEvent.metaKey, keyboardEvent.level3Key, keyboardEvent.level5Key, keyboardEvent.keyCode);
 		return new WindowsNativeResolvedKeybinding(this, [keybinding]);
 	}
 
@@ -489,7 +489,7 @@ export class WindowsKeyboardMapper implements IKeyboardMapper {
 		if (keyCode === KeyCode.Unknown || !this._keyCodeExists[keyCode]) {
 			return null;
 		}
-		return new SimpleKeybinding(binding.ctrlKey, binding.shiftKey, binding.altKey, binding.metaKey, keyCode);
+		return new SimpleKeybinding(binding.ctrlKey, binding.shiftKey, binding.altKey, binding.metaKey, binding.level3Key, binding.level5Key, keyCode);
 	}
 
 	public resolveUserBinding(input: (SimpleKeybinding | ScanCodeBinding)[]): ResolvedKeybinding[] {

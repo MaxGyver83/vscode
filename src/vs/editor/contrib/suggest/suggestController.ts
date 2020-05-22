@@ -186,8 +186,8 @@ export class SuggestController implements IEditorContribution {
 			this._toDispose.add(widget.onDetailsKeyDown(e => {
 				// cmd + c on macOS, ctrl + c on Win / Linux
 				if (
-					e.toKeybinding().equals(new SimpleKeybinding(true, false, false, false, KeyCode.KEY_C)) ||
-					(platform.isMacintosh && e.toKeybinding().equals(new SimpleKeybinding(false, false, false, true, KeyCode.KEY_C)))
+					e.toKeybinding().equals(new SimpleKeybinding(true, false, false, false, false, false, KeyCode.KEY_C)) ||
+					(platform.isMacintosh && e.toKeybinding().equals(new SimpleKeybinding(false, false, false, true, false, false, KeyCode.KEY_C)))
 				) {
 					e.stopPropagation();
 					return;

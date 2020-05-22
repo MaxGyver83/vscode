@@ -58,6 +58,8 @@ suite('AbstractKeybindingService', () => {
 				keyboardEvent.shiftKey,
 				keyboardEvent.altKey,
 				keyboardEvent.metaKey,
+				keyboardEvent.level3Key,
+				keyboardEvent.level5Key,
 				keyboardEvent.keyCode
 			).toChord();
 			return this.resolveKeybinding(keybinding)[0];
@@ -75,6 +77,8 @@ suite('AbstractKeybindingService', () => {
 				shiftKey: keybinding.shiftKey,
 				altKey: keybinding.altKey,
 				metaKey: keybinding.metaKey,
+				level3Key: keybinding.level3Key,
+				level5Key: keybinding.level5Key,
 				keyCode: keybinding.keyCode,
 				code: null!
 			}, null!);

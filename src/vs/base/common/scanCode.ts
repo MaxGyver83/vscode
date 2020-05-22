@@ -232,13 +232,17 @@ export class ScanCodeBinding {
 	public readonly shiftKey: boolean;
 	public readonly altKey: boolean;
 	public readonly metaKey: boolean;
+	public readonly level3Key: boolean;
+	public readonly level5Key: boolean;
 	public readonly scanCode: ScanCode;
 
-	constructor(ctrlKey: boolean, shiftKey: boolean, altKey: boolean, metaKey: boolean, scanCode: ScanCode) {
+	constructor(ctrlKey: boolean, shiftKey: boolean, altKey: boolean, metaKey: boolean, level3Key: boolean, level5Key: boolean, scanCode: ScanCode) {
 		this.ctrlKey = ctrlKey;
 		this.shiftKey = shiftKey;
 		this.altKey = altKey;
 		this.metaKey = metaKey;
+		this.level3Key = level3Key;
+		this.level5Key = level5Key;
 		this.scanCode = scanCode;
 	}
 

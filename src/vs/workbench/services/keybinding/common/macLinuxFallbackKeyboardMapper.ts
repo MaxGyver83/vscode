@@ -39,6 +39,8 @@ export class MacLinuxFallbackKeyboardMapper implements IKeyboardMapper {
 			keyboardEvent.shiftKey,
 			keyboardEvent.altKey,
 			keyboardEvent.metaKey,
+			keyboardEvent.level3Key,
+			keyboardEvent.level5Key,
 			keyboardEvent.keyCode
 		);
 		return new USLayoutResolvedKeybinding(keybinding.toChord(), this._OS);
@@ -115,7 +117,7 @@ export class MacLinuxFallbackKeyboardMapper implements IKeyboardMapper {
 		if (keyCode === KeyCode.Unknown) {
 			return null;
 		}
-		return new SimpleKeybinding(binding.ctrlKey, binding.shiftKey, binding.altKey, binding.metaKey, keyCode);
+		return new SimpleKeybinding(binding.ctrlKey, binding.shiftKey, binding.altKey, binding.metaKey, binding.level3Key, binding.level5Key, keyCode);
 	}
 
 	public resolveUserBinding(input: (SimpleKeybinding | ScanCodeBinding)[]): ResolvedKeybinding[] {

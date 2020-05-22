@@ -11,6 +11,8 @@ export interface ModifierLabels {
 	readonly shiftKey: string;
 	readonly altKey: string;
 	readonly metaKey: string;
+	readonly level3Key: string;
+	readonly level5Key: string;
 	readonly separator: string;
 }
 
@@ -19,6 +21,8 @@ export interface Modifiers {
 	readonly shiftKey: boolean;
 	readonly altKey: boolean;
 	readonly metaKey: boolean;
+	readonly level3Key: boolean;
+	readonly level5Key: boolean;
 }
 
 export interface KeyLabelProvider<T extends Modifiers> {
@@ -40,6 +44,7 @@ export class ModifierLabelProvider {
 		if (parts.length === 0) {
 			return null;
 		}
+		//console.log(parts);
 
 		const result: string[] = [];
 		for (let i = 0, len = parts.length; i < len; i++) {
@@ -49,6 +54,7 @@ export class ModifierLabelProvider {
 				// this keybinding cannot be expressed...
 				return null;
 			}
+			//console.log(part + ' ' + keyLabel);
 			result[i] = _simpleAsString(part, keyLabel, this.modifierLabels[OS]);
 		}
 		return result.join(' ');
@@ -64,6 +70,8 @@ export const UILabelProvider = new ModifierLabelProvider(
 		shiftKey: '⇧',
 		altKey: '⌥',
 		metaKey: '⌘',
+		level3Key: 'M3',
+		level5Key: 'M4',
 		separator: '',
 	},
 	{
@@ -71,6 +79,8 @@ export const UILabelProvider = new ModifierLabelProvider(
 		shiftKey: nls.localize({ key: 'shiftKey', comment: ['This is the short form for the Shift key on the keyboard'] }, "Shift"),
 		altKey: nls.localize({ key: 'altKey', comment: ['This is the short form for the Alt key on the keyboard'] }, "Alt"),
 		metaKey: nls.localize({ key: 'windowsKey', comment: ['This is the short form for the Windows key on the keyboard'] }, "Windows"),
+		level3Key: nls.localize({ key: 'level3Key.long', comment: ['This is the long form for the AltGraph key on the keyboard'] }, "Mod3"),
+		level5Key: nls.localize({ key: 'level5Key.long', comment: ['This is the long form for the level 5 modifier key on the keyboard'] }, "Mod5"),
 		separator: '+',
 	},
 	{
@@ -78,6 +88,8 @@ export const UILabelProvider = new ModifierLabelProvider(
 		shiftKey: nls.localize({ key: 'shiftKey', comment: ['This is the short form for the Shift key on the keyboard'] }, "Shift"),
 		altKey: nls.localize({ key: 'altKey', comment: ['This is the short form for the Alt key on the keyboard'] }, "Alt"),
 		metaKey: nls.localize({ key: 'superKey', comment: ['This is the short form for the Super key on the keyboard'] }, "Super"),
+		level3Key: nls.localize({ key: 'level3Key.long', comment: ['This is the long form for the AltGraph key on the keyboard'] }, "Mod3"),
+		level5Key: nls.localize({ key: 'level5Key.long', comment: ['This is the long form for the level 5 modifier key on the keyboard'] }, "Mod5"),
 		separator: '+',
 	}
 );
@@ -91,6 +103,8 @@ export const AriaLabelProvider = new ModifierLabelProvider(
 		shiftKey: nls.localize({ key: 'shiftKey.long', comment: ['This is the long form for the Shift key on the keyboard'] }, "Shift"),
 		altKey: nls.localize({ key: 'altKey.long', comment: ['This is the long form for the Alt key on the keyboard'] }, "Alt"),
 		metaKey: nls.localize({ key: 'cmdKey.long', comment: ['This is the long form for the Command key on the keyboard'] }, "Command"),
+		level3Key: nls.localize({ key: 'level3Key.long', comment: ['This is the long form for the AltGraph key on the keyboard'] }, "Mod3"),
+		level5Key: nls.localize({ key: 'level5Key.long', comment: ['This is the long form for the level 5 modifier key on the keyboard'] }, "Mod5"),
 		separator: '+',
 	},
 	{
@@ -98,6 +112,8 @@ export const AriaLabelProvider = new ModifierLabelProvider(
 		shiftKey: nls.localize({ key: 'shiftKey.long', comment: ['This is the long form for the Shift key on the keyboard'] }, "Shift"),
 		altKey: nls.localize({ key: 'altKey.long', comment: ['This is the long form for the Alt key on the keyboard'] }, "Alt"),
 		metaKey: nls.localize({ key: 'windowsKey.long', comment: ['This is the long form for the Windows key on the keyboard'] }, "Windows"),
+		level3Key: nls.localize({ key: 'level3Key.long', comment: ['This is the long form for the AltGraph key on the keyboard'] }, "Mod3"),
+		level5Key: nls.localize({ key: 'level5Key.long', comment: ['This is the long form for the level 5 modifier key on the keyboard'] }, "Mod5"),
 		separator: '+',
 	},
 	{
@@ -105,6 +121,8 @@ export const AriaLabelProvider = new ModifierLabelProvider(
 		shiftKey: nls.localize({ key: 'shiftKey.long', comment: ['This is the long form for the Shift key on the keyboard'] }, "Shift"),
 		altKey: nls.localize({ key: 'altKey.long', comment: ['This is the long form for the Alt key on the keyboard'] }, "Alt"),
 		metaKey: nls.localize({ key: 'superKey.long', comment: ['This is the long form for the Super key on the keyboard'] }, "Super"),
+		level3Key: nls.localize({ key: 'level3Key.long', comment: ['This is the long form for the AltGraph key on the keyboard'] }, "Mod3"),
+		level5Key: nls.localize({ key: 'level5Key.long', comment: ['This is the long form for the level 5 modifier key on the keyboard'] }, "Mod5"),
 		separator: '+',
 	}
 );
@@ -119,6 +137,8 @@ export const ElectronAcceleratorLabelProvider = new ModifierLabelProvider(
 		shiftKey: 'Shift',
 		altKey: 'Alt',
 		metaKey: 'Cmd',
+		level3Key: 'Mod3',
+		level5Key: 'Mod5',
 		separator: '+',
 	},
 	{
@@ -126,6 +146,8 @@ export const ElectronAcceleratorLabelProvider = new ModifierLabelProvider(
 		shiftKey: 'Shift',
 		altKey: 'Alt',
 		metaKey: 'Super',
+		level3Key: 'Mod3',
+		level5Key: 'Mod5',
 		separator: '+',
 	}
 );
@@ -139,6 +161,8 @@ export const UserSettingsLabelProvider = new ModifierLabelProvider(
 		shiftKey: 'shift',
 		altKey: 'alt',
 		metaKey: 'cmd',
+		level3Key: 'mod3',
+		level5Key: 'mod5',
 		separator: '+',
 	},
 	{
@@ -146,6 +170,8 @@ export const UserSettingsLabelProvider = new ModifierLabelProvider(
 		shiftKey: 'shift',
 		altKey: 'alt',
 		metaKey: 'win',
+		level3Key: 'mod3',
+		level5Key: 'mod5',
 		separator: '+',
 	},
 	{
@@ -153,6 +179,8 @@ export const UserSettingsLabelProvider = new ModifierLabelProvider(
 		shiftKey: 'shift',
 		altKey: 'alt',
 		metaKey: 'meta',
+		level3Key: 'mod3',
+		level5Key: 'mod5',
 		separator: '+',
 	}
 );
@@ -179,6 +207,18 @@ function _simpleAsString(modifiers: Modifiers, key: string, labels: ModifierLabe
 
 	if (modifiers.metaKey) {
 		result.push(labels.metaKey);
+	}
+
+	if (modifiers.level3Key) {
+		result.push(labels.level3Key);
+		result.push('');
+		return result.join(labels.separator);
+	}
+
+	if (modifiers.level5Key) {
+		result.push(labels.level5Key);
+		result.push('');
+		return result.join(labels.separator);
 	}
 
 	// the actual key

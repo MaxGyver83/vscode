@@ -187,6 +187,8 @@ export interface IKeyboardEvent {
 	readonly shiftKey: boolean;
 	readonly altKey: boolean;
 	readonly metaKey: boolean;
+	readonly level3Key: boolean;
+	readonly level5Key: boolean;
 	readonly keyCode: KeyCode;
 	readonly code: string;
 
@@ -216,6 +218,8 @@ export class StandardKeyboardEvent implements IKeyboardEvent {
 	public readonly shiftKey: boolean;
 	public readonly altKey: boolean;
 	public readonly metaKey: boolean;
+	public readonly level3Key: boolean;
+	public readonly level5Key: boolean;
 	public readonly keyCode: KeyCode;
 	public readonly code: string;
 
@@ -232,10 +236,12 @@ export class StandardKeyboardEvent implements IKeyboardEvent {
 		this.shiftKey = e.shiftKey;
 		this.altKey = e.altKey;
 		this.metaKey = e.metaKey;
+		this.level3Key = e.key === 'AltGraph';
+		this.level5Key = e.key === 'ShiftLevel5';
 		this.keyCode = extractKeyCode(e);
 		this.code = e.code;
 
-		// console.info(e.type + ": keyCode: " + e.keyCode + ", which: " + e.which + ", charCode: " + e.charCode + ", detail: " + e.detail + " ====> " + this.keyCode + ' -- ' + KeyCode[this.keyCode]);
+		console.info(e.type + ': keyCode: ' + e.keyCode + ', which: ' + e.which + ', charCode: ' + e.charCode + ', detail: ' + e.detail + ' ====> ' + this.keyCode + ' -- ' + KeyCode[this.keyCode]);
 
 		this.ctrlKey = this.ctrlKey || this.keyCode === KeyCode.Ctrl;
 		this.altKey = this.altKey || this.keyCode === KeyCode.Alt;
@@ -245,7 +251,7 @@ export class StandardKeyboardEvent implements IKeyboardEvent {
 		this._asKeybinding = this._computeKeybinding();
 		this._asRuntimeKeybinding = this._computeRuntimeKeybinding();
 
-		// console.log(`code: ${e.code}, keyCode: ${e.keyCode}, key: ${e.key}`);
+		console.log(`code: ${e.code}, keyCode: ${e.keyCode}, key: ${e.key}`);
 	}
 
 	public preventDefault(): void {
@@ -297,6 +303,6 @@ export class StandardKeyboardEvent implements IKeyboardEvent {
 		if (this.keyCode !== KeyCode.Ctrl && this.keyCode !== KeyCode.Shift && this.keyCode !== KeyCode.Alt && this.keyCode !== KeyCode.Meta) {
 			key = this.keyCode;
 		}
-		return new SimpleKeybinding(this.ctrlKey, this.shiftKey, this.altKey, this.metaKey, key);
+		return new SimpleKeybinding(this.ctrlKey, this.shiftKey, this.altKey, this.metaKey, this.level3Key, this.level5Key, key);
 	}
 }

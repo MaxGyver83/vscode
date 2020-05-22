@@ -390,6 +390,8 @@ export class StandaloneKeybindingService extends AbstractKeybindingService {
 			keyboardEvent.shiftKey,
 			keyboardEvent.altKey,
 			keyboardEvent.metaKey,
+			keyboardEvent.level3Key,
+			keyboardEvent.level5Key,
 			keyboardEvent.keyCode
 		).toChord();
 		return new USLayoutResolvedKeybinding(keybinding, OS);

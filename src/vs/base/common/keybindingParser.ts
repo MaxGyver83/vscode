@@ -16,6 +16,8 @@ export class KeybindingParser {
 		let shift = false;
 		let alt = false;
 		let meta = false;
+		let level3 = false;
+		let level5 = false;
 
 		let matchedModifier: boolean;
 
@@ -51,6 +53,16 @@ export class KeybindingParser {
 				input = input.substr('cmd-'.length);
 				matchedModifier = true;
 			}
+			if (/^mod3(\+|\-)/.test(input)) {
+				meta = true;
+				input = input.substr('mod3-'.length);
+				matchedModifier = true;
+			}
+			if (/^mod5(\+|\-)/.test(input)) {
+				meta = true;
+				input = input.substr('mod5-'.length);
+				matchedModifier = true;
+			}
 		} while (matchedModifier);
 
 		let key: string;
@@ -70,6 +82,8 @@ export class KeybindingParser {
 			shift,
 			alt,
 			meta,
+			level3,
+			level5,
 			key
 		};
 	}
@@ -77,7 +91,7 @@ export class KeybindingParser {
 	private static parseSimpleKeybinding(input: string): [SimpleKeybinding, string] {
 		const mods = this._readModifiers(input);
 		const keyCode = KeyCodeUtils.fromUserSettings(mods.key);
-		return [new SimpleKeybinding(mods.ctrl, mods.shift, mods.alt, mods.meta, keyCode), mods.remains];
+		return [new SimpleKeybinding(mods.ctrl, mods.shift, mods.alt, mods.meta, mods.level3, mods.level5, keyCode), mods.remains];
 	}
 
 	public static parseKeybinding(input: string, OS: OperatingSystem): Keybinding | null {
@@ -101,10 +115,10 @@ export class KeybindingParser {
 		if (scanCodeMatch) {
 			const strScanCode = scanCodeMatch[1];
 			const scanCode = ScanCodeUtils.lowerCaseToEnum(strScanCode);
-			return [new ScanCodeBinding(mods.ctrl, mods.shift, mods.alt, mods.meta, scanCode), mods.remains];
+			return [new ScanCodeBinding(mods.ctrl, mods.shift, mods.alt, mods.meta, mods.level3, mods.level5, scanCode), mods.remains];
 		}
 		const keyCode = KeyCodeUtils.fromUserSettings(mods.key);
-		return [new SimpleKeybinding(mods.ctrl, mods.shift, mods.alt, mods.meta, keyCode), mods.remains];
+		return [new SimpleKeybinding(mods.ctrl, mods.shift, mods.alt, mods.meta, mods.level3, mods.level5, keyCode), mods.remains];
 	}
 
 	static parseUserBinding(input: string): (SimpleKeybinding | ScanCodeBinding)[] {

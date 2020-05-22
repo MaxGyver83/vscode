@@ -35,6 +35,8 @@ export interface IKeyboardEvent {
 	readonly shiftKey: boolean;
 	readonly altKey: boolean;
 	readonly metaKey: boolean;
+	readonly level3Key: boolean;
+	readonly level5Key: boolean;
 	readonly keyCode: KeyCode;
 	readonly code: string;
 }

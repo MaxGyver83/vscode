@@ -107,6 +107,12 @@ export class USLayoutResolvedKeybinding extends BaseResolvedKeybinding<SimpleKey
 		if (keybinding.metaKey) {
 			result += 'meta+';
 		}
+		if (keybinding.level3Key) {
+			result += 'mod3+';
+		}
+		if (keybinding.level5Key) {
+			result += 'mod5+';
+		}
 		result += KeyCodeUtils.toString(keybinding.keyCode);
 
 		return result;

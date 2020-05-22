@@ -105,7 +105,7 @@ export class Driver implements IDriver, IWindowDriverRegistry {
 			throw new Error('Invalid window');
 		}
 		const webContents = window.win.webContents;
-		const noModifiedKeybinding = new SimpleKeybinding(false, false, false, false, keybinding.keyCode);
+		const noModifiedKeybinding = new SimpleKeybinding(false, false, false, false, false, false, keybinding.keyCode);
 		const resolvedKeybinding = new USLayoutResolvedKeybinding(noModifiedKeybinding.toChord(), OS);
 		const keyCode = resolvedKeybinding.getElectronAccelerator();
 

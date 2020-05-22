@@ -60,6 +60,8 @@ export abstract class BaseResolvedKeybinding<T extends Modifiers> extends Resolv
 			keybinding.shiftKey,
 			keybinding.altKey,
 			keybinding.metaKey,
+			keybinding.level3Key,
+			keybinding.level5Key,
 			this._getLabel(keybinding),
 			this._getAriaLabel(keybinding)
 		);

@@ -74,6 +74,8 @@ suite('keyboardMapper - WINDOWS de_ch', () => {
 				shiftKey: false,
 				altKey: false,
 				metaKey: false,
+				level3Key: false,
+				level5Key: false,
 				keyCode: KeyCode.KEY_Z,
 				code: null!
 			},
@@ -114,6 +116,8 @@ suite('keyboardMapper - WINDOWS de_ch', () => {
 				shiftKey: false,
 				altKey: false,
 				metaKey: false,
+				level3Key: false,
+				level5Key: false,
 				keyCode: KeyCode.US_CLOSE_SQUARE_BRACKET,
 				code: null!
 			},
@@ -258,6 +262,8 @@ suite('keyboardMapper - WINDOWS de_ch', () => {
 				shiftKey: false,
 				altKey: false,
 				metaKey: false,
+				level3Key: false,
+				level5Key: false,
 				keyCode: KeyCode.Home,
 				code: null!
 			},
@@ -280,8 +286,8 @@ suite('keyboardMapper - WINDOWS de_ch', () => {
 	test('resolveUserBinding Ctrl+[Comma] Ctrl+/', () => {
 		assertResolveUserBinding(
 			mapper, [
-			new ScanCodeBinding(true, false, false, false, ScanCode.Comma),
-			new SimpleKeybinding(true, false, false, false, KeyCode.US_SLASH),
+			new ScanCodeBinding(true, false, false, false, false, false, ScanCode.Comma),
+			new SimpleKeybinding(true, false, false, false, false, false, KeyCode.US_SLASH),
 		],
 			[{
 				label: 'Ctrl+, Ctrl+§',
@@ -304,6 +310,8 @@ suite('keyboardMapper - WINDOWS de_ch', () => {
 				shiftKey: false,
 				altKey: false,
 				metaKey: false,
+				level3Key: false,
+				level5Key: false,
 				keyCode: KeyCode.Ctrl,
 				code: null!
 			},
@@ -351,8 +359,8 @@ suite('keyboardMapper - WINDOWS en_us', () => {
 	test('resolveUserBinding Ctrl+[Comma] Ctrl+/', () => {
 		assertResolveUserBinding(
 			mapper, [
-			new ScanCodeBinding(true, false, false, false, ScanCode.Comma),
-			new SimpleKeybinding(true, false, false, false, KeyCode.US_SLASH),
+			new ScanCodeBinding(true, false, false, false, false, false, ScanCode.Comma),
+			new SimpleKeybinding(true, false, false, false, false, false, KeyCode.US_SLASH),
 		],
 			[{
 				label: 'Ctrl+, Ctrl+/',
@@ -369,7 +377,7 @@ suite('keyboardMapper - WINDOWS en_us', () => {
 	test('resolveUserBinding Ctrl+[Comma]', () => {
 		assertResolveUserBinding(
 			mapper, [
-			new ScanCodeBinding(true, false, false, false, ScanCode.Comma),
+			new ScanCodeBinding(true, false, false, false, false, false, ScanCode.Comma),
 		],
 			[{
 				label: 'Ctrl+,',
@@ -392,6 +400,8 @@ suite('keyboardMapper - WINDOWS en_us', () => {
 				shiftKey: false,
 				altKey: false,
 				metaKey: false,
+				level3Key: false,
+				level5Key: false,
 				keyCode: KeyCode.Ctrl,
 				code: null!
 			},
@@ -429,6 +439,8 @@ suite('keyboardMapper - WINDOWS por_ptb', () => {
 				shiftKey: false,
 				altKey: false,
 				metaKey: false,
+				level3Key: false,
+				level5Key: false,
 				keyCode: KeyCode.ABNT_C1,
 				code: null!
 			},
@@ -453,6 +465,8 @@ suite('keyboardMapper - WINDOWS por_ptb', () => {
 				shiftKey: false,
 				altKey: false,
 				metaKey: false,
+				level3Key: false,
+				level5Key: false,
 				keyCode: KeyCode.ABNT_C2,
 				code: null!
 			},

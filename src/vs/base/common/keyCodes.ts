@@ -435,9 +435,11 @@ export function createSimpleKeybinding(keybinding: number, OS: OperatingSystem):
 	const shiftKey = (keybinding & BinaryKeybindingsMask.Shift ? true : false);
 	const altKey = (keybinding & BinaryKeybindingsMask.Alt ? true : false);
 	const metaKey = (OS === OperatingSystem.Macintosh ? ctrlCmd : winCtrl);
+	const level3Key = false;
+	const level5Key = false;
 	const keyCode = (keybinding & BinaryKeybindingsMask.KeyCode);
 
-	return new SimpleKeybinding(ctrlKey, shiftKey, altKey, metaKey, keyCode);
+	return new SimpleKeybinding(ctrlKey, shiftKey, altKey, metaKey, level3Key, level5Key, keyCode);
 }
 
 export class SimpleKeybinding {
@@ -445,13 +447,17 @@ export class SimpleKeybinding {
 	public readonly shiftKey: boolean;
 	public readonly altKey: boolean;
 	public readonly metaKey: boolean;
+	public readonly level3Key: boolean;
+	public readonly level5Key: boolean;
 	public readonly keyCode: KeyCode;
 
-	constructor(ctrlKey: boolean, shiftKey: boolean, altKey: boolean, metaKey: boolean, keyCode: KeyCode) {
+	constructor(ctrlKey: boolean, shiftKey: boolean, altKey: boolean, metaKey: boolean, level3Key: boolean, level5Key: boolean, keyCode: KeyCode) {
 		this.ctrlKey = ctrlKey;
 		this.shiftKey = shiftKey;
 		this.altKey = altKey;
 		this.metaKey = metaKey;
+		this.level3Key = level3Key;
+		this.level5Key = level5Key;
 		this.keyCode = keyCode;
 	}
 
@@ -544,15 +550,19 @@ export class ResolvedKeybindingPart {
 	readonly shiftKey: boolean;
 	readonly altKey: boolean;
 	readonly metaKey: boolean;
+	readonly level3Key: boolean;
+	readonly level5Key: boolean;
 
 	readonly keyLabel: string | null;
 	readonly keyAriaLabel: string | null;
 
-	constructor(ctrlKey: boolean, shiftKey: boolean, altKey: boolean, metaKey: boolean, kbLabel: string | null, kbAriaLabel: string | null) {
+	constructor(ctrlKey: boolean, shiftKey: boolean, altKey: boolean, metaKey: boolean, level3Key: boolean, level5Key: boolean, kbLabel: string | null, kbAriaLabel: string | null) {
 		this.ctrlKey = ctrlKey;
 		this.shiftKey = shiftKey;
 		this.altKey = altKey;
 		this.metaKey = metaKey;
+		this.level3Key = level3Key;
+		this.level5Key = level5Key;
 		this.keyLabel = kbLabel;
 		this.keyAriaLabel = kbAriaLabel;
 	}

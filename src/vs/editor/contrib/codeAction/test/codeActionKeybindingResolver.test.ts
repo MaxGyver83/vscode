@@ -84,7 +84,7 @@ suite('CodeActionKeybindingResolver', () => {
 function createCodeActionKeybinding(keycode: KeyCode, command: string, commandArgs: any) {
 	return new ResolvedKeybindingItem(
 		new USLayoutResolvedKeybinding(
-			new ChordKeybinding([new SimpleKeybinding(false, true, false, false, keycode)]),
+			new ChordKeybinding([new SimpleKeybinding(false, true, false, false, false, false, keycode)]),
 			OperatingSystem.Linux),
 		command,
 		commandArgs,
